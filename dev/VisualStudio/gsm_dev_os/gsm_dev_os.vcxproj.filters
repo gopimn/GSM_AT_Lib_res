@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\GSM LL">
+      <UniqueIdentifier>{a7a2f464-2a72-438b-95c3-287e652c47f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GSM SNIPPETS">
+      <UniqueIdentifier>{f53eba69-7eb3-428c-9053-e398ae95bf8e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GSM CORE">
+      <UniqueIdentifier>{2ccedd44-52f3-42de-a09f-0efbb182a9bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GSM API">
+      <UniqueIdentifier>{ed3e52b6-f791-4856-bea8-c539749fbd7b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GSM DRIVER">
+      <UniqueIdentifier>{7a8644f8-e7bd-4d80-9cd2-d49aea430405}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="main.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GSM_AT_Lib\src\gsm\gsm.c">
+      <Filter>Source Files\GSM CORE</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GSM_AT_Lib\src\gsm\gsm_buff.c">
+      <Filter>Source Files\GSM CORE</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GSM_AT_Lib\src\gsm\gsm_debug.c">
+      <Filter>Source Files\GSM CORE</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GSM_AT_Lib\src\gsm\gsm_evt.c">
+      <Filter>Source Files\GSM CORE</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GSM_AT_Lib\src\gsm\gsm_input.c">
+      <Filter>Source Files\GSM CORE</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GSM_AT_Lib\src\gsm\gsm_int.c">
+      <Filter>Source Files\GSM CORE</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GSM_AT_Lib\src\gsm\gsm_mem.c">
+      <Filter>Source Files\GSM CORE</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GSM_AT_Lib\src\gsm\gsm_parser.c">
+      <Filter>Source Files\GSM CORE</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GSM_AT_Lib\src\gsm\gsm_pbuf.c">
+      <Filter>Source Files\GSM CORE</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GSM_AT_Lib\src\gsm\gsm_threads.c">
+      <Filter>Source Files\GSM CORE</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GSM_AT_Lib\src\gsm\gsm_timeout.c">
+      <Filter>Source Files\GSM CORE</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GSM_AT_Lib\src\system\gsm_ll_win32.c">
+      <Filter>Source Files\GSM LL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GSM_AT_Lib\src\system\gsm_sys_win32.c">
+      <Filter>Source Files\GSM LL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GSM_AT_Lib\src\gsm\gsm_unicode.c">
+      <Filter>Source Files\GSM CORE</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GSM_AT_Lib\src\gsm\gsm_call.c">
+      <Filter>Source Files\GSM CORE</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GSM_AT_Lib\src\gsm\gsm_http.c">
+      <Filter>Source Files\GSM CORE</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GSM_AT_Lib\src\gsm\gsm_phonebook.c">
+      <Filter>Source Files\GSM CORE</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GSM_AT_Lib\src\gsm\gsm_sms.c">
+      <Filter>Source Files\GSM CORE</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GSM_AT_Lib\src\gsm\gsm_network.c">
+      <Filter>Source Files\GSM CORE</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GSM_AT_Lib\src\gsm\gsm_operator.c">
+      <Filter>Source Files\GSM CORE</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GSM_AT_Lib\src\gsm\gsm_sim.c">
+      <Filter>Source Files\GSM CORE</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GSM_AT_Lib\src\drivers\gsm_device_sim800.c">
+      <Filter>Source Files\GSM DRIVER</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GSM_AT_Lib\src\gsm\gsm_device.c">
+      <Filter>Source Files\GSM CORE</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
