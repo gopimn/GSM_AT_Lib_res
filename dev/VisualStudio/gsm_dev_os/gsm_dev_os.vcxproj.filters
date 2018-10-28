@@ -25,9 +25,6 @@
     <Filter Include="Source Files\GSM API">
       <UniqueIdentifier>{ed3e52b6-f791-4856-bea8-c539749fbd7b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\GSM DRIVER">
-      <UniqueIdentifier>{7a8644f8-e7bd-4d80-9cd2-d49aea430405}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -110,10 +107,7 @@
     <ClCompile Include="..\..\..\GSM_AT_Lib\src\gsm\gsm_sim.c">
       <Filter>Source Files\GSM CORE</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\GSM_AT_Lib\src\drivers\gsm_device_sim800.c">
-      <Filter>Source Files\GSM DRIVER</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\GSM_AT_Lib\src\gsm\gsm_device.c">
+    <ClCompile Include="..\..\..\GSM_AT_Lib\src\gsm\gsm_conn.c">
       <Filter>Source Files\GSM CORE</Filter>
     </ClCompile>
   </ItemGroup>

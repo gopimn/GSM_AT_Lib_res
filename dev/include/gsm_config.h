@@ -44,10 +44,8 @@
 #define GSM_CFG_IPD_MAX_BUFF_SIZE           1460
 #define GSM_CFG_INPUT_USE_PROCESS           1
 #define GSM_CFG_AT_ECHO                     1
-#define GSM_CFG_MAX_CONNS                   5
 
 #define GSM_CFG_CONN                        1
-
 #define GSM_CFG_SMS                         1
 #define GSM_CFG_CALL                        1
 #define GSM_CFG_PHONEBOOK                   1
