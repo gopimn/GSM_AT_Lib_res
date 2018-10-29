@@ -81,10 +81,15 @@ main_thread(void* arg) {
 
     printf("Attached to network!\r\n");
 
-    gsm_conn_start(NULL, GSM_CONN_TYPE_TCP, "example.com", 80, NULL, gsm_conn_evt, 1);
+    gsm_conn_start(NULL, GSM_CONN_TYPE_TCP, "example.com", 80, NULL, gsm_conn_evt, 0);
+    gsm_conn_start(NULL, GSM_CONN_TYPE_TCP, "example.com", 80, NULL, gsm_conn_evt, 0);
+    gsm_conn_start(NULL, GSM_CONN_TYPE_TCP, "example.com", 80, NULL, gsm_conn_evt, 0);
+    gsm_conn_start(NULL, GSM_CONN_TYPE_TCP, "example.com", 80, NULL, gsm_conn_evt, 0);
+    gsm_conn_start(NULL, GSM_CONN_TYPE_TCP, "example.com", 80, NULL, gsm_conn_evt, 0);
+    gsm_conn_start(NULL, GSM_CONN_TYPE_TCP, "example.com", 80, NULL, gsm_conn_evt, 0);
 
     //printf("Detaching...\r\n");
-    gsm_delay(10000);
+    //gsm_delay(10000);
     gsm_network_detach(1);
 
     gsm_delay(5000);
@@ -118,17 +123,19 @@ gsm_conn_evt(gsm_evt_t* evt) {
             printf("Connection closed\r\n");
             break;
         }
-        case GSM_EVT_CONN_DATA_SENT: {
-            printf("Data sent!\r\n");
-            break;
-        }
-        case GSM_EVT_CONN_DATA_SEND_ERR: {
-            printf("Data send error!\r\n");
+        case GSM_EVT_CONN_DATA_SEND: {
+            gsmr_t res = gsm_evt_conn_data_send_get_result(evt);
+            if (res == gsmOK) {
+                printf("Data sent!\r\n");
+            } else {
+                printf("Data send error!\r\n");
+            }
             break;
         }
         case GSM_EVT_CONN_DATA_RECV: {
             gsm_pbuf_p p = gsm_evt_conn_data_recv_get_buff(evt);
             printf("DATA RECEIVED: %d\r\n", (int)gsm_pbuf_length(p, 1));
+            gsm_conn_recved(c, p);
             break;
         }
         default: break;
