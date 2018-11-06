@@ -68,11 +68,15 @@ main_thread(void* arg) {
     
     gsm_operator_scan(operators, GSM_ARRAYSIZE(operators), &operators_len, 1);
 
+#if GSM_CFG_CALL
     gsm_call_enable(1);
     //gsm_call_start("+38640167724", 1);
+#endif /* GSM_CFG_CALL */
 
+#if GSM_CFG_SMS
     gsm_sms_enable(1);
     //gsm_sms_send("+38640167724", "Tilen MAJERLE", 1);
+#endif /* GSM_CFG_SMS */
 
     gsm_delay(8000);
 
@@ -81,12 +85,15 @@ main_thread(void* arg) {
 
     printf("Attached to network!\r\n");
 
+
+#if GSM_CFG_CONN
     gsm_conn_start(NULL, GSM_CONN_TYPE_TCP, "example.com", 80, NULL, gsm_conn_evt, 0);
     gsm_conn_start(NULL, GSM_CONN_TYPE_TCP, "example.com", 80, NULL, gsm_conn_evt, 0);
     gsm_conn_start(NULL, GSM_CONN_TYPE_TCP, "example.com", 80, NULL, gsm_conn_evt, 0);
     gsm_conn_start(NULL, GSM_CONN_TYPE_TCP, "example.com", 80, NULL, gsm_conn_evt, 0);
     gsm_conn_start(NULL, GSM_CONN_TYPE_TCP, "example.com", 80, NULL, gsm_conn_evt, 0);
     gsm_conn_start(NULL, GSM_CONN_TYPE_TCP, "example.com", 80, NULL, gsm_conn_evt, 0);
+#endif /* GSM_CFG_CONN */
 
     //printf("Detaching...\r\n");
     //gsm_delay(10000);
@@ -110,6 +117,7 @@ gsm_conn_evt(gsm_evt_t* evt) {
     gsm_conn_p c;
     c = gsm_conn_get_from_evt(evt);
     switch (gsm_evt_get_type(evt)) {
+#if GSM_CFG_CONN
         case GSM_EVT_CONN_ACTIVE: {
             printf("Connection active\r\n");
             gsm_conn_send(c, request_data, sizeof(request_data) - 1, NULL, 0);
@@ -138,6 +146,7 @@ gsm_conn_evt(gsm_evt_t* evt) {
             gsm_conn_recved(c, p);
             break;
         }
+#endif /* GSM_CFG_CONN */
         default: break;
     }
     return gsmOK;
