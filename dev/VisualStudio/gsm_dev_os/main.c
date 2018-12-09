@@ -4,7 +4,6 @@
 #include "stdafx.h"
 #include "windows.h"
 #include "gsm/gsm.h"
-#include "gsm/gsm_conn.h"
 
 static void main_thread(void* arg);
 DWORD main_thread_id;
@@ -51,6 +50,14 @@ main() {
 	}
 }
 
+/* COnnection request data */
+static const
+uint8_t request_data[] = ""
+"GET / HTTP/1.1\r\n"
+"Host: example.com\r\n"
+"Connection: Close\r\n"
+"\r\n";
+
 /**
  * \brief           Main thread for init purposes
  */
@@ -58,6 +65,7 @@ static void
 main_thread(void* arg) {
     size_t i;
     int16_t rssi;
+    gsm_netconn_p nc;
 
     /* Init GSM library */
     gsm_init(gsm_evt, 1);
@@ -85,18 +93,52 @@ main_thread(void* arg) {
 
     printf("Attached to network!\r\n");
 
+#if GSM_CFG_NETCONN
+    nc = gsm_netconn_new(GSM_NETCONN_TYPE_TCP);
+    if (gsm_netconn_connect(nc, "example.com", 80) == gsmOK) {
+        printf("Connected to example.com!\r\n");
+        if (gsm_netconn_write(nc, request_data, sizeof(request_data) - 1) == gsmOK) {
+            gsm_pbuf_p p;
+            gsmr_t res;
+
+            printf("NETCONN data written!\r\n");
+            gsm_netconn_flush(nc);
+            printf("NETCONN data flushed!\r\n");
+
+            while (1) {
+                res = gsm_netconn_receive(nc, &p);
+                if (res == gsmOK) {
+                    printf("New data packet received. Length: %d\r\n", (int)gsm_pbuf_length(p, 1));
+                    
+                } else if (res == gsmCLOSED) {
+                    printf("Netconn connection closed by remote side!\r\n");
+                    break;
+                }
+            }
+        }
+
+        if (gsm_netconn_close(nc) == gsmOK) {
+            printf("NETCONN closed!\r\n");
+        } else {
+            printf("Cannot close netconn connection!\r\n");
+        }
+        gsm_netconn_delete(nc);
+    } else {
+        printf("Cannot connect to example.com!\r\n");
+    }
+
+#endif /* GSM_CFG_NETCONN */
 
 #if GSM_CFG_CONN
-    gsm_conn_start(NULL, GSM_CONN_TYPE_TCP, "example.com", 80, NULL, gsm_conn_evt, 0);
-    gsm_conn_start(NULL, GSM_CONN_TYPE_TCP, "example.com", 80, NULL, gsm_conn_evt, 0);
-    gsm_conn_start(NULL, GSM_CONN_TYPE_TCP, "example.com", 80, NULL, gsm_conn_evt, 0);
-    gsm_conn_start(NULL, GSM_CONN_TYPE_TCP, "example.com", 80, NULL, gsm_conn_evt, 0);
-    gsm_conn_start(NULL, GSM_CONN_TYPE_TCP, "example.com", 80, NULL, gsm_conn_evt, 0);
-    gsm_conn_start(NULL, GSM_CONN_TYPE_TCP, "example.com", 80, NULL, gsm_conn_evt, 0);
+    //gsm_conn_start(NULL, GSM_CONN_TYPE_TCP, "example.com", 80, NULL, gsm_conn_evt, 0);
+    //gsm_conn_start(NULL, GSM_CONN_TYPE_TCP, "example.com", 80, NULL, gsm_conn_evt, 0);
+    //gsm_conn_start(NULL, GSM_CONN_TYPE_TCP, "example.com", 80, NULL, gsm_conn_evt, 0);
+    //gsm_conn_start(NULL, GSM_CONN_TYPE_TCP, "example.com", 80, NULL, gsm_conn_evt, 0);
+    //gsm_conn_start(NULL, GSM_CONN_TYPE_TCP, "example.com", 80, NULL, gsm_conn_evt, 0);
+    //gsm_conn_start(NULL, GSM_CONN_TYPE_TCP, "example.com", 80, NULL, gsm_conn_evt, 0);
 #endif /* GSM_CFG_CONN */
 
     //printf("Detaching...\r\n");
-    //gsm_delay(10000);
     gsm_network_detach(1);
 
     gsm_delay(5000);
@@ -104,13 +146,6 @@ main_thread(void* arg) {
     /* Terminate thread */
     gsm_sys_thread_terminate(NULL);
 }
-
-static const
-uint8_t request_data[] = ""
-"GET / HTTP/1.1\r\n"
-"Host: example.com\r\n"
-"Connection: Close\r\n"
-"\r\n";
 
 static gsmr_t
 gsm_conn_evt(gsm_evt_t* evt) {
@@ -120,7 +155,7 @@ gsm_conn_evt(gsm_evt_t* evt) {
 #if GSM_CFG_CONN
         case GSM_EVT_CONN_ACTIVE: {
             printf("Connection active\r\n");
-            gsm_conn_send(c, request_data, sizeof(request_data) - 1, NULL, 0);
+            //gsm_conn_send(c, request_data, sizeof(request_data) - 1, NULL, 0);
             break;
         }
         case GSM_EVT_CONN_ERROR: {

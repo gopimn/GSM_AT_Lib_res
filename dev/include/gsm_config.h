@@ -50,6 +50,8 @@
 #define GSM_CFG_CALL                        1
 #define GSM_CFG_PHONEBOOK                   1
 
+#define GSM_CFG_NETCONN                     1
+
 #if defined(WIN32)
 #define GSM_CFG_SYS_PORT					GSM_SYS_PORT_WIN32
 #endif

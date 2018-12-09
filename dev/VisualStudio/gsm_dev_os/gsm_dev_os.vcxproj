@@ -145,6 +145,7 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\GSM_AT_Lib\src\api\gsm_netconn.c" />
     <ClCompile Include="..\..\..\GSM_AT_Lib\src\gsm\gsm.c" />
     <ClCompile Include="..\..\..\GSM_AT_Lib\src\gsm\gsm_buff.c" />
     <ClCompile Include="..\..\..\GSM_AT_Lib\src\gsm\gsm_call.c" />
