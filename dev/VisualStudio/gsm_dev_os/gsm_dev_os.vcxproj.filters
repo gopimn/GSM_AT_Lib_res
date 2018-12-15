@@ -25,6 +25,9 @@
     <Filter Include="Source Files\GSM API">
       <UniqueIdentifier>{ed3e52b6-f791-4856-bea8-c539749fbd7b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\GSM APP MQTT">
+      <UniqueIdentifier>{b5bac07c-e836-48d3-b94a-59c59380b16e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -112,6 +115,15 @@
     </ClCompile>
     <ClCompile Include="..\..\..\GSM_AT_Lib\src\api\gsm_netconn.c">
       <Filter>Source Files\GSM API</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GSM_AT_Lib\src\apps\mqtt\gsm_mqtt_client.c">
+      <Filter>Source Files\GSM APP MQTT</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GSM_AT_Lib\src\apps\mqtt\gsm_mqtt_client_api.c">
+      <Filter>Source Files\GSM APP MQTT</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GSM_AT_Lib\src\apps\mqtt\gsm_mqtt_client_evt.c">
+      <Filter>Source Files\GSM APP MQTT</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
