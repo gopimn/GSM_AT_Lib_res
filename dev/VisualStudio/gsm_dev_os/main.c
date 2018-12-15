@@ -352,6 +352,23 @@ gsm_evt(gsm_evt_t* evt) {
             printf("Signal strength: %d\r\n", (int)rssi);
             break;
         }
+#if GSM_CFG_NETWORK
+        case GSM_EVT_NETWORK_ATTACHED: {
+            gsm_ip_t ip;
+
+            printf("\r\n---\r\n--- Network attached! ---\r\n---\r\n");
+            if (gsm_network_copy_ip(&ip) == gsmOK) {
+                printf("\r\n---\r\n--- IP: %d.%d.%d.%d ---\r\n---\r\n",
+                    (int)ip.ip[0], (int)ip.ip[1], (int)ip.ip[2], (int)ip.ip[3]
+                );
+            }
+            break;
+        }
+        case GSM_EVT_NETWORK_DETACHED: {
+            printf("\r\n---\r\n--- Network detached! ---\r\n---\r\n");
+            break;
+        }
+#endif /* GSM_CFG_NETWORK */
 #if GSM_CFG_CALL
         case GSM_EVT_CALL_READY: {
             printf("Call is ready!\r\n");
