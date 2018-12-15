@@ -88,43 +88,45 @@ main_thread(void* arg) {
 
     gsm_delay(8000);
 
-    printf("Attaching...\r\n");
-    gsm_network_attach("internet", "", "", 1);
+    gsm_operator_rssi(NULL, 1);
+    gsm_operator_rssi(NULL, 1);
+    gsm_operator_rssi(NULL, 1);
 
-    printf("Attached to network!\r\n");
+    printf("Attaching...\r\n");
+    if (gsm_network_attach("internet", "", "", 1) == gsmOK) {
+        printf("Attached to network\r\n");
+    } else {
+        printf("Cannot attach to network!\r\n");
+    }
 
 #if GSM_CFG_NETCONN
     nc = gsm_netconn_new(GSM_NETCONN_TYPE_TCP);
-    if (gsm_netconn_connect(nc, "example.com", 80) == gsmOK) {
-        printf("Connected to example.com!\r\n");
-        if (gsm_netconn_write(nc, request_data, sizeof(request_data) - 1) == gsmOK) {
-            gsm_pbuf_p p;
-            gsmr_t res;
+    if (nc != NULL) {
+        if (gsm_netconn_connect(nc, "example.com", 80) == gsmOK) {
+            printf("Connected to example.com!\r\n");
+            if (gsm_netconn_write(nc, request_data, sizeof(request_data) - 1) == gsmOK) {
+                gsm_pbuf_p p;
+                gsmr_t res;
 
-            printf("NETCONN data written!\r\n");
-            gsm_netconn_flush(nc);
-            printf("NETCONN data flushed!\r\n");
+                printf("NETCONN data written!\r\n");
+                gsm_netconn_flush(nc);
+                printf("NETCONN data flushed!\r\n");
 
-            while (1) {
-                res = gsm_netconn_receive(nc, &p);
-                if (res == gsmOK) {
-                    printf("New data packet received. Length: %d\r\n", (int)gsm_pbuf_length(p, 1));
+                while (1) {
+                    res = gsm_netconn_receive(nc, &p);
+                    if (res == gsmOK) {
+                        printf("New data packet received. Length: %d\r\n", (int)gsm_pbuf_length(p, 1));
                     
-                } else if (res == gsmCLOSED) {
-                    printf("Netconn connection closed by remote side!\r\n");
-                    break;
+                    } else if (res == gsmCLOSED) {
+                        printf("Netconn connection closed by remote side!\r\n");
+                        break;
+                    }
                 }
             }
-        }
-
-        if (gsm_netconn_close(nc) == gsmOK) {
-            printf("NETCONN closed!\r\n");
         } else {
-            printf("Cannot close netconn connection!\r\n");
+            printf("Cannot connect to example.com!\r\n");
         }
         gsm_netconn_delete(nc);
-    } else {
-        printf("Cannot connect to example.com!\r\n");
     }
 
 #endif /* GSM_CFG_NETCONN */
@@ -228,6 +230,11 @@ gsm_evt(gsm_evt_t* evt) {
             } else if (evt->evt.cpin.state == GSM_SIM_STATE_PIN) {
                 gsm_sim_pin_enter(sim.pin, 0);
             }
+            break;
+        }
+        case GSM_EVT_SIGNAL_STRENGTH: {
+            int16_t rssi = gsm_evt_signal_strength_get_rssi(evt);
+            printf("Signal strength: %d\r\n", (int)rssi);
             break;
         }
 #if GSM_CFG_CALL
