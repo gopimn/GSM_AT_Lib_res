@@ -1,0 +1,8 @@
+/**
+ * \addtogroup      GSM_CONF
+ * \{
+ *
+ *
+ *
+ * \}
+ */
