@@ -197,6 +197,9 @@ main_thread(void* arg) {
 
     gsm_delay(8000);
 
+    gsm_pb_enable(1);
+    gsm_pb_read(GSM_MEM_CURRENT, 1, pb_entries, 1);
+
     //while (1) {
     //    printf("Attaching...\r\n");
     //    if (gsm_network_attach("internet", "", "", 1) == gsmOK) {
@@ -410,12 +413,12 @@ gsm_evt(gsm_evt_t* evt) {
             //gsm_sms_send("+38640167724", "Device reset and ready for more operations!", 0);
             break;
         }
-        case GSM_EVT_SMS_SENT: {
-            printf("SMS has been sent!\r\n");
-            break;
-        }
-        case GSM_EVT_SMS_SEND_ERROR: {
-            printf("SMS was not sent!\r\n");
+        case GSM_EVT_SMS_SEND: {
+            if (evt->evt.sms_send.success) {
+                printf("SMS sent successfully!\r\n");
+            } else {
+                printf("SMS was not sent!\r\n");
+            }
             break;
         }
         case GSM_EVT_SMS_RECV: {
