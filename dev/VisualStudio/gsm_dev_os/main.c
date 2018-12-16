@@ -197,22 +197,29 @@ main_thread(void* arg) {
 
     gsm_delay(8000);
 
-    gsm_operator_rssi(NULL, 1);
-    gsm_operator_rssi(NULL, 1);
-    gsm_operator_rssi(NULL, 1);
-
-    printf("Attaching...\r\n");
-    if (gsm_network_attach("internet", "", "", 1) == gsmOK) {
-        printf("Attached to network\r\n");
-    } else {
-        printf("Cannot attach to network!\r\n");
-    }
+    //while (1) {
+    //    printf("Attaching...\r\n");
+    //    if (gsm_network_attach("internet", "", "", 1) == gsmOK) {
+    //        printf("Attached to network\r\n");
+    //        gsm_network_detach(1);
+    //    } else {
+    //        printf("Cannot attach to network!\r\n");
+    //    }
+    //}
 
 #if GSM_CFG_NETCONN
-
     gsm_sys_thread_create(NULL, "mqtt_thread", (gsm_sys_thread_fn)mqtt_client_api_thread, NULL, GSM_SYS_THREAD_SS, GSM_SYS_THREAD_PRIO);
     while (1) {
-        gsm_delay(100000);
+        if (!gsm_network_is_attached()) {
+            /* Try to attach manually! */
+            printf("Attaching...\r\n");
+            if (gsm_network_attach("internet", "", "", 1) == gsmOK) {
+                printf("Attached to network\r\n");
+            } else {
+                printf("Cannot attach to network!\r\n");
+            }
+        }
+        gsm_delay(10000);
     }
 
     nc = gsm_netconn_new(GSM_NETCONN_TYPE_TCP);
@@ -245,15 +252,6 @@ main_thread(void* arg) {
     }
 
 #endif /* GSM_CFG_NETCONN */
-
-#if GSM_CFG_CONN
-    //gsm_conn_start(NULL, GSM_CONN_TYPE_TCP, "example.com", 80, NULL, gsm_conn_evt, 0);
-    //gsm_conn_start(NULL, GSM_CONN_TYPE_TCP, "example.com", 80, NULL, gsm_conn_evt, 0);
-    //gsm_conn_start(NULL, GSM_CONN_TYPE_TCP, "example.com", 80, NULL, gsm_conn_evt, 0);
-    //gsm_conn_start(NULL, GSM_CONN_TYPE_TCP, "example.com", 80, NULL, gsm_conn_evt, 0);
-    //gsm_conn_start(NULL, GSM_CONN_TYPE_TCP, "example.com", 80, NULL, gsm_conn_evt, 0);
-    //gsm_conn_start(NULL, GSM_CONN_TYPE_TCP, "example.com", 80, NULL, gsm_conn_evt, 0);
-#endif /* GSM_CFG_CONN */
 
     //printf("Detaching...\r\n");
     gsm_network_detach(1);
@@ -328,17 +326,6 @@ gsm_evt(gsm_evt_t* evt) {
             printf("Device has been identified!\r\n");
             break;
         }
-        case GSM_EVT_OPERATOR_CURRENT: {
-            const gsm_operator_curr_t* op = gsm_evt_operator_current_get_operator(evt);
-            if (op->format == GSM_OPERATOR_FORMAT_LONG_NAME) {
-                printf("Operator long name: %s\r\n", op->data.long_name);
-            } else if (op->format == GSM_OPERATOR_FORMAT_SHORT_NAME) {
-                printf("Operator short name: %s\r\n", op->data.short_name);
-            } else if (op->format == GSM_OPERATOR_FORMAT_NUMBER) {
-                printf("Operator number: %d\r\n", (int)op->data.num);
-            }
-            break;
-        }
         case GSM_EVT_CPIN: {
             if (evt->evt.cpin.state == GSM_SIM_STATE_PUK) {
                 gsm_sim_puk_enter(sim.puk, sim.pin, 0);
@@ -350,6 +337,31 @@ gsm_evt(gsm_evt_t* evt) {
         case GSM_EVT_SIGNAL_STRENGTH: {
             int16_t rssi = gsm_evt_signal_strength_get_rssi(evt);
             printf("Signal strength: %d\r\n", (int)rssi);
+            break;
+        }
+        case GSM_EVT_NETWORK_REG: {
+            gsm_network_reg_status_t status = gsm_network_get_reg_status();
+            printf("Network registration changed. New status: %d! ", (int)status);
+            switch (status) {
+                case GSM_NETWORK_REG_STATUS_CONNECTED: printf("Connected to home network!\r\n"); break;
+                case GSM_NETWORK_REG_STATUS_CONNECTED_ROAMING: printf("Connected to network and roaming!\r\n"); break;
+                case GSM_NETWORK_REG_STATUS_SEARCHING: printf("Searching for network!\r\n"); break;
+                case GSM_NETWORK_REG_STATUS_SIM_ERR: printf("SIM error\r\n"); break;
+                default: break;
+            }
+            break;
+        }
+        case GSM_EVT_NETWORK_OPERATOR_CURRENT: {
+            const gsm_operator_curr_t* op = gsm_evt_network_operator_get_current(evt);
+            if (op != NULL) {
+                if (op->format == GSM_OPERATOR_FORMAT_LONG_NAME) {
+                    printf("Operator long name: %s\r\n", op->data.long_name);
+                } else if (op->format == GSM_OPERATOR_FORMAT_SHORT_NAME) {
+                    printf("Operator short name: %s\r\n", op->data.short_name);
+                } else if (op->format == GSM_OPERATOR_FORMAT_NUMBER) {
+                    printf("Operator number: %d\r\n", (int)op->data.num);
+                }
+            }
             break;
         }
 #if GSM_CFG_NETWORK
@@ -372,7 +384,7 @@ gsm_evt(gsm_evt_t* evt) {
 #if GSM_CFG_CALL
         case GSM_EVT_CALL_READY: {
             printf("Call is ready!\r\n");
-            //gsm_call_start("+38640167724", 0);
+            gsm_call_start("+38640167724", 0);
             break;
         }
         case GSM_EVT_CALL_CHANGED: {
