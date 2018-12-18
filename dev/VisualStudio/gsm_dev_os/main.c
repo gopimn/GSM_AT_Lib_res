@@ -77,7 +77,7 @@ mqtt_client_info = {
     .pass = "26aa943f702e5e780f015cd048a91e8fb54cca28",
 
     /* Device identifier address */
-    .id = "b24908a0-a652-11e8-af33-cfeebe848e6e",
+    .id = "2c3573a0-0176-11e9-a056-c5cffe7f75f9",
 
     .keep_alive = 10,
 };
@@ -284,8 +284,8 @@ gsm_conn_evt(gsm_evt_t* evt) {
             printf("Connection closed\r\n");
             break;
         }
-        case GSM_EVT_CONN_DATA_SEND: {
-            gsmr_t res = gsm_evt_conn_data_send_get_result(evt);
+        case GSM_EVT_CONN_SEND: {
+            gsmr_t res = gsm_evt_conn_send_get_result(evt);
             if (res == gsmOK) {
                 printf("Data sent!\r\n");
             } else {
@@ -293,8 +293,8 @@ gsm_conn_evt(gsm_evt_t* evt) {
             }
             break;
         }
-        case GSM_EVT_CONN_DATA_RECV: {
-            gsm_pbuf_p p = gsm_evt_conn_data_recv_get_buff(evt);
+        case GSM_EVT_CONN_RECV: {
+            gsm_pbuf_p p = gsm_evt_conn_recv_get_buff(evt);
             printf("DATA RECEIVED: %d\r\n", (int)gsm_pbuf_length(p, 1));
             gsm_conn_recved(c, p);
             break;
@@ -414,7 +414,7 @@ gsm_evt(gsm_evt_t* evt) {
             break;
         }
         case GSM_EVT_SMS_SEND: {
-            if (evt->evt.sms_send.success) {
+            if (evt->evt.sms_send.res == gsmOK) {
                 printf("SMS sent successfully!\r\n");
             } else {
                 printf("SMS was not sent!\r\n");

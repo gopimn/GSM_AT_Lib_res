@@ -41,7 +41,7 @@ conn_evt(gsm_evt_t* evt) {
         }
         
         /* Data received on connection */
-        case GSM_EVT_CONN_DATA_RECV: {
+        case GSM_EVT_CONN_RECV: {
             gsm_pbuf_p pbuf = cb->evt.conn_data_recv.buff;   /* Get data buffer */
             
             /*

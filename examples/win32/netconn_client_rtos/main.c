@@ -67,6 +67,8 @@ main(void) {
 
         /* Start netconn thread */
         gsm_sys_thread_create(NULL, "netconn_thread", (gsm_sys_thread_t)netconn_client_thread, NULL, GSM_SYS_THREAD_SS, GSM_SYS_THREAD_PRIO);
+    } else {
+        printf("Cannot attach to network!\r\n");
     }
 
     /*
