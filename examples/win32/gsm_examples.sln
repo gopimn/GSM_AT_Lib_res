@@ -9,6 +9,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NETCONN Client RTOS", "netc
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SMS Send Receive RTOS", "sms_send_receive_rtos\sms_send_receive_rtos.vcxproj", "{9C65D520-C6E0-4057-80B4-DFDE9CA3AC78}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MQTT Client API RTOS", "mqtt_client_api_rtos\mqtt_client_api_rtos.vcxproj", "{5C81D771-4B23-463C-8C96-34DD20DB0EA0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -41,6 +43,14 @@ Global
 		{9C65D520-C6E0-4057-80B4-DFDE9CA3AC78}.Release|x64.Build.0 = Release|x64
 		{9C65D520-C6E0-4057-80B4-DFDE9CA3AC78}.Release|x86.ActiveCfg = Release|Win32
 		{9C65D520-C6E0-4057-80B4-DFDE9CA3AC78}.Release|x86.Build.0 = Release|Win32
+		{5C81D771-4B23-463C-8C96-34DD20DB0EA0}.Debug|x64.ActiveCfg = Debug|x64
+		{5C81D771-4B23-463C-8C96-34DD20DB0EA0}.Debug|x64.Build.0 = Debug|x64
+		{5C81D771-4B23-463C-8C96-34DD20DB0EA0}.Debug|x86.ActiveCfg = Debug|Win32
+		{5C81D771-4B23-463C-8C96-34DD20DB0EA0}.Debug|x86.Build.0 = Debug|Win32
+		{5C81D771-4B23-463C-8C96-34DD20DB0EA0}.Release|x64.ActiveCfg = Release|x64
+		{5C81D771-4B23-463C-8C96-34DD20DB0EA0}.Release|x64.Build.0 = Release|x64
+		{5C81D771-4B23-463C-8C96-34DD20DB0EA0}.Release|x86.ActiveCfg = Release|Win32
+		{5C81D771-4B23-463C-8C96-34DD20DB0EA0}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
