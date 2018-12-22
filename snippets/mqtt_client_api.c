@@ -18,7 +18,7 @@
  * \brief           Connection information for MQTT CONNECT packet
  */
 static const gsm_mqtt_client_info_t
-mqtt_client_info = {    
+mqtt_client_info = {
     .keep_alive = 10,
 
     /* Server login data */
