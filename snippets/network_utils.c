@@ -22,7 +22,7 @@ network_utils_process_reg_change(gsm_evt_t* evt) {
     switch (stat) {
         case GSM_NETWORK_REG_STATUS_CONNECTED: printf("Connected to home network!\r\n"); break;
         case GSM_NETWORK_REG_STATUS_CONNECTED_ROAMING: printf("Connected to network and roaming!\r\n"); break;
-        case GSM_NETWORK_REG_STATUS_SEARCHING: printf("Seraching for network!\r\n"); break;
+        case GSM_NETWORK_REG_STATUS_SEARCHING: printf("Searching for network!\r\n"); break;
         case GSM_NETWORK_REG_STATUS_SIM_ERR: printf("SIM CARD ERROR!\r\n"); break;
         default: printf("Other\r\n");
     }

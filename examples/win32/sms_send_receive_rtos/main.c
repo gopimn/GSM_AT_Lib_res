@@ -139,6 +139,9 @@ gsm_callback_func(gsm_evt_t* evt) {
                 } else {
                     printf("Cannot start SMS send procedure!\r\n");
                 }
+
+                /* Delete SMS from device memory */
+                gsm_sms_delete(entry->mem, entry->pos, 0);
             }
             break;
         }
