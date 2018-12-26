@@ -83,7 +83,7 @@
  *      <caption>STM32 boards and pinouts for tests</caption>
  *      <tr><th> 						<th colspan="4">GSM target settings	<th colspan="5">Debug settings
  *      <tr><th>Board name				<th>UART 	<th>MTX <th>MRX <th>RST <th>UART    <th>MDTX<th>MDRX<th>DBD     <th>Comment
- *      <tr><td>\b STM32F429ZI-Nucleo   <td>USART2 	<td>PD5 <td>PD6 <td>PD1 <td>USART3  <td>PD8 <td>PD9 <td>921600  <td>OBSTL
+ *      <tr><td>\b STM32F429ZI-Nucleo   <td>USART6 	<td>PC6 <td>PC7 <td>PC5 <td>USART3  <td>PD8 <td>PD9 <td>921600  <td>OBSTL
  *  </table>
  *
  * 	- \b MTX: MCU TX pin, other device RX pin
