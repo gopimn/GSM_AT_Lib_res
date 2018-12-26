@@ -43,11 +43,6 @@
 #define GSM_CFG_SYS_PORT                    GSM_SYS_PORT_CMSIS_OS
 #define GSM_CFG_INPUT_USE_PROCESS           1
 
-/* Enable debugging */
-#define GSM_CFG_DBG                         GSM_DBG_ON
-#define GSM_CFG_DBG_TYPES_ON                (GSM_DBG_TYPE_TRACE | GSM_DBG_TYPE_STATE)
-
-
 /* Enable connection and netconn API */
 #define GSM_CFG_CONN                        1
 #define GSM_CFG_NETCONN                     1
