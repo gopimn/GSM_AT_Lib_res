@@ -74,7 +74,7 @@ main(void) {
     }
 
     /* Now send SMS from phone to device */
-
+    printf("Start by sending SMS message to device...\r\n");
 #endif /* GSM_CFG_SMS */
 
     /*
