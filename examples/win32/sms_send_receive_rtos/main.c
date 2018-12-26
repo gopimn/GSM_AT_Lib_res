@@ -106,7 +106,7 @@ gsm_callback_func(gsm_evt_t* evt) {
 
         /* Other user events here... */
 
-#if GSM_CFG_SMS     
+#if GSM_CFG_SMS
         case GSM_EVT_SMS_READY: {               /* SMS is ready notification from device */
             printf("SIM device SMS service is ready!\r\n");
             break;
@@ -127,7 +127,7 @@ gsm_callback_func(gsm_evt_t* evt) {
         }
         case GSM_EVT_SMS_READ: {                /* SMS read event */
             gsm_sms_entry_t* entry = gsm_evt_sms_read_get_entry(evt);
-            if (entry != NULL) {
+            if (gsm_evt_sms_read_get_res(evt) == gsmOK && entry != NULL) {
                 /* Print SMS data */
                 printf("SMS read. From: %s, content: %s\r\n",
                     entry->number, entry->data
@@ -150,6 +150,14 @@ gsm_callback_func(gsm_evt_t* evt) {
                 printf("SMS has been successfully sent!\r\n");
             } else {
                 printf("SMS has not been sent successfully!\r\n");
+            }
+            break;
+        }
+        case GSM_EVT_SMS_DELETE: {
+            if (gsm_evt_sms_delete_get_result(evt) == gsmOK) {
+                printf("SMS deleted, memory position: %d\r\n", (int)gsm_evt_sms_delete_get_pos(evt));
+            } else {
+                printf("SMS delete operation failed!\r\n");
             }
             break;
         }
