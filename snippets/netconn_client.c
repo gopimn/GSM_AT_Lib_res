@@ -26,6 +26,7 @@ netconn_client_thread(void const* arg) {
     gsmr_t res;
     gsm_pbuf_p pbuf;
     gsm_netconn_p client;
+    gsm_sys_sem_t* sem = (void *)arg;
 
     /*
      * First create a new instance of netconn
@@ -102,7 +103,10 @@ netconn_client_thread(void const* arg) {
             printf("Cannot connect to remote host %s:%d!\r\n", NETCONN_HOST, NETCONN_PORT);
         }
     }
-
     gsm_netconn_delete(client);                 /* Delete netconn structure */
+
+    if (gsm_sys_sem_isvalid(sem)) {
+        gsm_sys_sem_release(sem);
+    }
     gsm_sys_thread_terminate(NULL);             /* Terminate current thread */
 }
