@@ -41,7 +41,7 @@
  *
  * Several examples are available to show application use cases. These are split and can be tested on different systems.
  *
- * \subsection      subsect_project_examples_win32 WIN32
+ * \subsection      subsect_project_examples_win32 WIN32 examples
  *
  * Library is developed under WIN32 system. That is, all examples are first developed and tested under WIN32, later ported to embedded application.
  * Examples come with <b>Visual Studio</b> project. You may open project and directly run the example from there.
@@ -73,6 +73,28 @@
  *
  * \note            In order to start using this port, user must set the appropriate COM port name when opening a virtual file. 
  *                  Please check implementation file for details.
+ *
+ * \subsection      subsect_project_examples_arm_embedded ARM Cortex-M examples
+ *
+ * Library is indendant from CPU architecture, meaning we can also run it on embedded systems. 
+ * Different ports for `FreeRTOS` operating system and `STM32` based microcontrollers are available too.
+ *
+ *  <table>
+ *      <caption>STM32 boards and pinouts for tests</caption>
+ *      <tr><th> 						<th colspan="4">GSM target settings	<th colspan="5">Debug settings
+ *      <tr><th>Board name				<th>UART 	<th>MTX <th>MRX <th>RST <th>UART    <th>MDTX<th>MDRX<th>DBD     <th>Comment
+ *      <tr><td>\b STM32F429ZI-Nucleo   <td>USART2 	<td>PD5 <td>PD6 <td>PD1 <td>USART3  <td>PD8 <td>PD9 <td>921600  <td>OBSTL
+ *  </table>
+ *
+ * 	- \b MTX: MCU TX pin, other device RX pin
+ * 	- \b MRX: MCU RX pin, other device TX pin
+ * 	- \b RST: Reset pin from GSM device, connected to MCU
+ * 	- \b MDTX: MCU Debug TX pin, other device RX pin
+ * 	- \b MDRX: MCU Debug RX pin, other device TX pin
+ * 	- \b DBD: Debug UART baudrate
+ * 	- \b OBSTL: On-Board ST-Link USB virtual COM port
+ *
+ * \note            All examples for STM32 come with ST's official free development studio.
  *
  * \section         sect_porting_guide Porting guide
  *
