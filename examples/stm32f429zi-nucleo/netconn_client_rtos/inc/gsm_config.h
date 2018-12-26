@@ -43,7 +43,8 @@
 #define GSM_CFG_SYS_PORT                    GSM_SYS_PORT_CMSIS_OS
 #define GSM_CFG_INPUT_USE_PROCESS           1
 
-/* Enable connection and netconn API */
+/* Enable network, conn and netconn APIs */
+#define GSM_CFG_NETWORK                     1
 #define GSM_CFG_CONN                        1
 #define GSM_CFG_NETCONN                     1
 
