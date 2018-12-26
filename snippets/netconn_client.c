@@ -1,6 +1,8 @@
 #include "netconn_client.h"
 #include "gsm/gsm.h"
 
+#if GSM_CFG_NETCONN
+
 /**
  * \brief           Host and port settings
  */
@@ -110,3 +112,5 @@ netconn_client_thread(void const* arg) {
     }
     gsm_sys_thread_terminate(NULL);             /* Terminate current thread */
 }
+
+#endif /* GSM_CFG_NETCONN */
