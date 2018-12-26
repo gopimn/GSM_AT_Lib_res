@@ -58,7 +58,7 @@ main(void) {
 
     /* Configure device by unlocking SIM card */
     if (configure_sim_card()) {
-        printf("SIM card configured. Adding delay to stabilite SIM card.\r\n");
+        printf("SIM card configured. Adding delay to stabilize SIM card.\r\n");
         gsm_delay(10000);
     } else {
         printf("Cannot configure SIM card! Is it inserted, pin valid and not under PUK? Closing down...\r\n");
