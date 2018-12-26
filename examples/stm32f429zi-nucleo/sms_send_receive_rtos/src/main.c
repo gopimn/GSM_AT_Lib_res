@@ -34,8 +34,6 @@
 #include "gsm/gsm.h"
 #include "sim_manager.h"
 #include "network_utils.h"
-#include "netconn_client.h"
-#include "network_apn_settings.h"
 
 static void LL_Init(void);
 void SystemClock_Config(void);
