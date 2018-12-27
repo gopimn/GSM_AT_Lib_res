@@ -149,7 +149,7 @@ gsm_callback_func(gsm_evt_t* evt) {
         }
         case GSM_EVT_SMS_READ: {                /* SMS read event */
             gsm_sms_entry_t* entry = gsm_evt_sms_read_get_entry(evt);
-            if (gsm_evt_sms_read_get_res(evt) == gsmOK && entry != NULL) {
+            if (gsm_evt_sms_read_get_result(evt) == gsmOK && entry != NULL) {
                 /* Print SMS data */
                 printf("SMS read. From: %s, content: %s\r\n",
                     entry->number, entry->data
