@@ -76,7 +76,7 @@
  *
  * \subsection      subsect_project_examples_arm_embedded ARM Cortex-M examples
  *
- * Library is indendant from CPU architecture, meaning we can also run it on embedded systems. 
+ * Library is independant from CPU architecture, meaning we can also run it on embedded systems. 
  * Different ports for `FreeRTOS` operating system and `STM32` based microcontrollers are available too.
  *
  *  <table>
@@ -164,11 +164,8 @@
  *
  * \include         _example_config.h
  *
- * \note            Important notes:
- *                      - Always do default settings modifications in user custom `gsm_config.h` file
- *                          which was previously renamed from `gsm_config_template.h`,
- *                      - Always include `gsm/gsm_debug.h` before any custom settings and
- *                          `gsm/gsm_config_default.h` after custom settings
+ * \note            Always modify default settings by overriding them in user's custom `gsm_config.h` file
+ *                      which was previously renamed from `gsm_config_template.h`
  *
  * \section         sect_thread_comm Inter-thread communication
  *
