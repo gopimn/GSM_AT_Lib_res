@@ -131,7 +131,7 @@ gsm_callback_func(gsm_evt_t* evt) {
     switch (gsm_evt_get_type(evt)) {
         case GSM_EVT_INIT_FINISH: printf("Library initialized!\r\n"); break;
         /* Process and print registration change */
-        case GSM_EVT_NETWORK_REG: network_utils_process_reg_change(evt); break;
+        case GSM_EVT_NETWORK_REG_CHANGED: network_utils_process_reg_change(evt); break;
         /* Process current network operator */
         case GSM_EVT_NETWORK_OPERATOR_CURRENT: network_utils_process_curr_operator(evt); break;
         /* Process signal strength */
