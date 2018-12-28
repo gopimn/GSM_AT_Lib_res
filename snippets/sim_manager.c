@@ -5,13 +5,13 @@
  * \brief           SIM card pin code
  */
 const char *
-pin_code = "5979";
+pin_code = "2573";
 
 /**
  * \brief           SIM card puk code
  */
 const char *
-puk_code = "";
+puk_code = "26466162";
 
 /**
  * \brief           Configure and enable SIM card
