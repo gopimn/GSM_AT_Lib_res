@@ -47,7 +47,7 @@ network_utils_process_curr_operator(gsm_evt_t* evt) {
         }
     }
     /* Start RSSI info */
-    gsm_network_rssi(&rssi, 0);
+    gsm_network_rssi(&rssi, NULL, NULL, 0);
 }
 
 /** 

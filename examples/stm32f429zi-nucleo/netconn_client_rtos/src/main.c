@@ -90,7 +90,7 @@ init_thread(void const* arg) {
 
     /* Connect to network for TCP/IP */
     printf("Attaching to network..\r\n");
-    if (gsm_network_attach(NETWORK_APN, NETWORK_APN_USER, NETWORK_APN_PASS, 1) == gsmOK) {
+    if (gsm_network_attach(NETWORK_APN, NETWORK_APN_USER, NETWORK_APN_PASS, NULL, NULL, 1) == gsmOK) {
         printf("Attached to network!\r\n");
 
         /* Start netconn thread */
@@ -105,7 +105,7 @@ init_thread(void const* arg) {
 
         /* Detach from network */
         printf("Detaching from network..\r\n");
-        if (gsm_network_detach(1) == gsmOK) {
+        if (gsm_network_detach(NULL, NULL, 1) == gsmOK) {
             printf("Detached from network\r\n");
         } else {
             printf("Cannot detach from network\r\n");

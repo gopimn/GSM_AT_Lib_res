@@ -60,7 +60,7 @@ main(void) {
     }
 
     /* Enable calls */
-    if (gsm_call_enable(1) == gsmOK) {
+    if (gsm_call_enable(NULL, NULL, 1) == gsmOK) {
         printf("Calls enabled. You may take your phone and call modem.\r\n");
     } else {
         printf("Could not enabled call functionality!\r\n");
@@ -102,11 +102,11 @@ gsm_callback_func(gsm_evt_t* evt) {
 
                 /* In case of mobile originated direction */
                 if (call->dir == GSM_CALL_DIR_MO) {
-                    gsm_call_hangup(0);         /* Manually hangup call */
+                    gsm_call_hangup(NULL, NULL, 0); /* Manually hangup call */
                 }
             } else if (call->state == GSM_CALL_STATE_INCOMING) {
                 printf("We received incoming call! Phone number: %s\r\n", call->number);
-                gsm_call_answer(0);             /* Answer to a call */
+                gsm_call_answer(NULL, NULL, 0); /* Answer to a call */
             } else if (call->state == GSM_CALL_STATE_DIALING) {
                 printf("Call is dialing!\r\n");
             } else if (call->state == GSM_CALL_STATE_DISCONNECT) {

@@ -66,14 +66,14 @@ main(void) {
     }
 
     /* First enable SMS functionality */
-    if (gsm_sms_enable(1) == gsmOK) {
+    if (gsm_sms_enable(NULL, NULL, 1) == gsmOK) {
         printf("SMS enabled. Send new SMS from your phone to device.\r\n");
     } else {
         printf("Cannot enable SMS functionality!\r\n");
     }
 
     /* Then enable call functionality */
-    if (gsm_call_enable(1) == gsmOK) {
+    if (gsm_call_enable(NULL, NULL, 1) == gsmOK) {
         printf("Call enabled. You may now take your phone and call modem\r\n");
     } else {
         printf("Cannot enable call functionality!\r\n");
@@ -118,7 +118,7 @@ gsm_callback_func(gsm_evt_t* evt) {
             printf("New SMS received!\r\n");    /* Notify user */
 
             /* Try to read SMS */
-            res = gsm_sms_read(gsm_evt_sms_recv_get_mem(evt), gsm_evt_sms_recv_get_pos(evt), &sms_entry, 1, 0);
+            res = gsm_sms_read(gsm_evt_sms_recv_get_mem(evt), gsm_evt_sms_recv_get_pos(evt), &sms_entry, 1, NULL, NULL, 0);
             if (res == gsmOK) {
                 printf("SMS read in progress!\r\n");
             } else {
@@ -135,14 +135,14 @@ gsm_callback_func(gsm_evt_t* evt) {
                 );
 
                 /* Try to send SMS back */
-                if (gsm_sms_send(entry->number, entry->data, 0) == gsmOK) {
+                if (gsm_sms_send(entry->number, entry->data, NULL, NULL, 0) == gsmOK) {
                     printf("SMS send in progress!\r\n");
                 } else {
                     printf("Cannot start SMS send procedure!\r\n");
                 }
 
                 /* Delete SMS from device memory */
-                gsm_sms_delete(entry->mem, entry->pos, 0);
+                gsm_sms_delete(entry->mem, entry->pos, NULL, NULL, 0);
             }
             break;
         }
@@ -162,8 +162,8 @@ gsm_callback_func(gsm_evt_t* evt) {
         case GSM_EVT_CALL_CHANGED: {
             const gsm_call_t* call = gsm_evt_call_changed_get_call(evt);
             if (call->state == GSM_CALL_STATE_INCOMING) {   /* On incoming call */
-                gsm_call_hangup(0);             /* Hangup call */
-                gsm_sms_send(call->number, "Cannot answer call. Please send SMS\r\n", 0);
+                gsm_call_hangup(NULL, NULL, 0); /* Hangup call */
+                gsm_sms_send(call->number, "Cannot answer call. Please send SMS\r\n", NULL, NULL, 0);
             }
             break;
         }

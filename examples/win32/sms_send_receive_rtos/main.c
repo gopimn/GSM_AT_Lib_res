@@ -67,7 +67,7 @@ main(void) {
 
 #if GSM_CFG_SMS
     /* First enable SMS functionality */
-    if (gsm_sms_enable(1) == gsmOK) {
+    if (gsm_sms_enable(NULL, NULL, 1) == gsmOK) {
         printf("SMS enabled. Send new SMS from your phone to device.\r\n");
     } else {
         printf("Cannot enable SMS functionality!\r\n");
@@ -117,7 +117,7 @@ gsm_callback_func(gsm_evt_t* evt) {
             printf("New SMS received!\r\n");    /* Notify user */
 
             /* Try to read SMS */
-            res = gsm_sms_read(gsm_evt_sms_recv_get_mem(evt), gsm_evt_sms_recv_get_pos(evt), &sms_entry, 1, 0);
+            res = gsm_sms_read(gsm_evt_sms_recv_get_mem(evt), gsm_evt_sms_recv_get_pos(evt), &sms_entry, 1, NULL, NULL, 0);
             if (res == gsmOK) {
                 printf("SMS read in progress!\r\n");
             } else {
@@ -134,14 +134,14 @@ gsm_callback_func(gsm_evt_t* evt) {
                 );
 
                 /* Try to send SMS back */
-                if (gsm_sms_send(entry->number, entry->data, 0) == gsmOK) {
+                if (gsm_sms_send(entry->number, entry->data, NULL, NULL, 0) == gsmOK) {
                     printf("SMS send in progress!\r\n");
                 } else {
                     printf("Cannot start SMS send procedure!\r\n");
                 }
 
                 /* Delete SMS from device memory */
-                gsm_sms_delete(entry->mem, entry->pos, 0);
+                gsm_sms_delete(entry->mem, entry->pos, NULL, NULL, 0);
             }
             break;
         }

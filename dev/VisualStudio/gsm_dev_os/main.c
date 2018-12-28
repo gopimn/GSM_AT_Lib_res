@@ -104,7 +104,7 @@ main_thread(void* arg) {
     printf("Connected to home network...\r\n");
 
 #if GSM_CFG_CALL
-    gsm_call_enable(1);
+    gsm_call_enable(NULL, NULL, 1);
 
     /* Enable SIM with first call */
     //gsm_call_start("+38640167724", 0);
@@ -112,24 +112,24 @@ main_thread(void* arg) {
 #endif /* GSM_CFG_CALL */
 
 #if GSM_CFG_SMS
-    gsm_sms_enable(1);
+    gsm_sms_enable(NULL, NULL, 1);
     //gsm_sms_send("+38640167724", "Tilen MAJERLE", 1);
 #endif /* GSM_CFG_SMS */
 
 #if GSM_CFG_PB
-    gsm_pb_enable(1);
-    gsm_pb_read(GSM_MEM_CURRENT, 1, pb_entries, 1);
+    gsm_pb_enable(NULL, NULL, 1);
+    gsm_pb_read(GSM_MEM_CURRENT, 1, pb_entries, NULL, NULL, 1);
 #endif /* GSM_CFG_PB */
 
     printf("Enabling PDP context...\r\n");
-    if (gsm_network_attach("internet", "", "", 1) == gsmOK) {
+    if (gsm_network_attach("internet", "", "", NULL, NULL, 1) == gsmOK) {
         printf("Attached to network\r\n");
     } else {
         printf("Cannot attach to network!\r\n");
     }
 
     //printf("Detaching...\r\n");
-    gsm_network_detach(1);
+    gsm_network_detach(NULL, NULL, 1);
 
     gsm_delay(5000);
 
@@ -251,7 +251,7 @@ gsm_evt(gsm_evt_t* evt) {
 #if GSM_CFG_CALL
         case GSM_EVT_CALL_READY: {
             printf("Call is ready!\r\n");
-            gsm_call_start("+38640167724", 0);
+            gsm_call_start("+38640167724", NULL, NULL, 0);
             break;
         }
         case GSM_EVT_CALL_CHANGED: {
@@ -260,13 +260,13 @@ gsm_evt(gsm_evt_t* evt) {
             if (call->state == GSM_CALL_STATE_ACTIVE) {
                 printf("Call active!\r\n");
                 if (call->dir == GSM_CALL_DIR_MT) {
-                    gsm_call_hangup(0);
+                    gsm_call_hangup(NULL, NULL, 0);
                 }
             } else if (call->state == GSM_CALL_STATE_INCOMING) {
                 printf("Incoming call. Answering...\r\n");
                 //gsm_call_answer(0);
-                gsm_call_hangup(0);
-                gsm_sms_send(call->number, "Device does not accept calls!", 0);
+                gsm_call_hangup(NULL, NULL, 0);
+                gsm_sms_send(call->number, "Device does not accept calls!", NULL, NULL, 0);
             }
             break;
         }
@@ -287,9 +287,9 @@ gsm_evt(gsm_evt_t* evt) {
         }
         case GSM_EVT_SMS_RECV: {
             printf("SMS received: %d\r\n", (int)evt->evt.sms_recv.pos);
-            gsm_sms_read(evt->evt.sms_recv.mem, evt->evt.sms_recv.pos, &sms_entry, 0, 0);
+            gsm_sms_read(evt->evt.sms_recv.mem, evt->evt.sms_recv.pos, &sms_entry, 0, NULL, NULL, 0);
             //gsm_sms_read(GSM_MEM_CURRENT, evt->evt.sms_recv.pos, &sms_entry, 0, 0);
-            gsm_sms_delete(evt->evt.sms_recv.mem, evt->evt.sms_recv.pos, 0);
+            gsm_sms_delete(evt->evt.sms_recv.mem, evt->evt.sms_recv.pos, NULL, NULL, 0);
             //gsm_sms_delete(evt->evt.sms_recv.mem, evt->evt.sms_recv.pos, 0);
             break;
         }

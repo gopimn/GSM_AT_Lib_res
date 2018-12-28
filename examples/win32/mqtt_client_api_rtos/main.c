@@ -62,7 +62,7 @@ main(void) {
     }
 
     /* Connect to network for TCP/IP */
-    if (gsm_network_attach(NETWORK_APN, NETWORK_APN_USER, NETWORK_APN_PASS, 1) == gsmOK) {
+    if (gsm_network_attach(NETWORK_APN, NETWORK_APN_USER, NETWORK_APN_PASS, NULL, NULL, 1) == gsmOK) {
         printf("Attached to network!\r\n");
 
         /* Start netconn thread */
