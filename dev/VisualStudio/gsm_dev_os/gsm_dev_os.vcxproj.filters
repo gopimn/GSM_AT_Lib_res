@@ -125,5 +125,17 @@
     <ClCompile Include="..\..\..\GSM_AT_Lib\src\apps\mqtt\gsm_mqtt_client_evt.c">
       <Filter>Source Files\GSM APP MQTT</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\snippets\mqtt_client_api.c">
+      <Filter>Source Files\GSM SNIPPETS</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\snippets\netconn_client.c">
+      <Filter>Source Files\GSM SNIPPETS</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\snippets\network_utils.c">
+      <Filter>Source Files\GSM SNIPPETS</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\snippets\sim_manager.c">
+      <Filter>Source Files\GSM SNIPPETS</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

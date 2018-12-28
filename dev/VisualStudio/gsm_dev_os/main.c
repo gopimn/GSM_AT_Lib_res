@@ -33,8 +33,8 @@ typedef struct {
     const char* puk;
 } my_sim_t;
 my_sim_t sim = {
-    .pin = "1234",
-    .puk = "81641429",
+    .pin = "3219",
+    .puk = "26466162",
 };
 
 /**
@@ -61,110 +61,14 @@ uint8_t request_data[] = ""
 "Connection: Close\r\n"
 "\r\n";
 
-/**
- * \brief           Client ID is structured from ESP station MAC address
- */
-static char
-mqtt_client_id[13];
-
-/**
- * \brief           Connection information for MQTT CONNECT packet
- */
-static const gsm_mqtt_client_info_t
-mqtt_client_info = {
-    /* Server login data */
-    .user = "8a215f70-a644-11e8-ac49-e932ed599553",
-    .pass = "26aa943f702e5e780f015cd048a91e8fb54cca28",
-
-    /* Device identifier address */
-    .id = "2c3573a0-0176-11e9-a056-c5cffe7f75f9",
-
-    .keep_alive = 10,
-};
-
-/**
- * \brief           MQTT client API thread
- */
 void
-mqtt_client_api_thread(void const* arg) {
-    gsm_mqtt_client_api_p client;
-    gsm_mqtt_conn_status_t conn_status;
-    gsm_mqtt_client_api_buf_p buf;
-    gsmr_t res;
+pin_evt(gsmr_t res, void* arg) {
+    printf("PIN EVT function!\r\n");
+}
 
-    /* Create new MQTT API */
-    client = gsm_mqtt_client_api_new(256, 128);
-    if (client == NULL) {
-        goto terminate;
-    }
-
-    while (1) {
-        /* Make a connection */
-        printf("Joining MQTT server\r\n");
-
-        /* Try to join */
-        conn_status = gsm_mqtt_client_api_connect(client, "mqtt.mydevices.com", 1883, &mqtt_client_info);
-        if (conn_status == GSM_MQTT_CONN_STATUS_ACCEPTED) {
-            printf("Connected and accepted!\r\n");
-            printf("Client is ready to subscribe and publish to new messages\r\n");
-        } else {
-            printf("Connect API response: %d\r\n", (int)conn_status);
-            gsm_delay(5000);
-            continue;
-        }
-
-        /* Subscribe to topics */
-        if (gsm_mqtt_client_api_subscribe(client,
-            "v1/8a215f70-a644-11e8-ac49-e932ed599553/things/b24908a0-a652-11e8-af33-cfeebe848e6e/cmd/#",
-            GSM_MQTT_QOS_AT_LEAST_ONCE) == gsmOK) {
-            printf("Subscribed to esp8266_mqtt_topic\r\n");
-        } else {
-            printf("Problem subscribing to topic!\r\n");
-        }
-
-        while (1) {
-            /* Receive MQTT packet with 1000ms timeout */
-            res = gsm_mqtt_client_api_receive(client, &buf, 1000);
-            if (res == gsmOK) {
-                if (buf != NULL) {
-                    const char* payload;
-                    printf("Publish received!\r\n");
-                    printf("Topic: %s, payload: %s\r\n", buf->topic, buf->payload);
-
-                    /* Check for light switch */
-                    if ((strstr(buf->topic, "/cmd/25")) != NULL) {
-                        payload = strstr((void *)buf->payload, ",");
-                        if (payload != NULL) {
-                            payload++;
-                            if (*payload == '1') {
-                                printf("RELAY ENABLED!\r\n");
-                            } else {
-                                printf("RELAY DISABLED!\r\n");
-                            }
-
-                            /* Format topic name */
-                            gsm_mqtt_client_api_publish(client, 
-                                "v1/8a215f70-a644-11e8-ac49-e932ed599553/things/b24908a0-a652-11e8-af33-cfeebe848e6e/data/25",
-                                payload, 1, GSM_MQTT_QOS_AT_LEAST_ONCE, 1);
-                        }
-                    }
-                    gsm_mqtt_client_api_buf_free(buf);
-                    buf = NULL;
-                }
-            } else if (res == gsmCLOSED) {
-                printf("MQTT connection closed!\r\n");
-                break;
-            } else if (res == gsmTIMEOUT) {
-                /* Receive timeout */
-                /* printf("Timeout\r\n"); */
-            }
-        }
-    }
-
-terminate: 
-    gsm_mqtt_client_api_delete(client);
-    printf("MQTT client thread terminate\r\n");
-    gsm_sys_thread_terminate(NULL);
+void
+puk_evt(gsmr_t res, void* arg) {
+    printf("PUK EVT function!\r\n");
 }
 
 /**
@@ -172,21 +76,38 @@ terminate:
  */
 static void
 main_thread(void* arg) {
-    size_t i;
-    int16_t rssi;
-    gsm_netconn_p nc;
+    gsm_sim_state_t sim_state;
 
     /* Init GSM library */
     gsm_init(gsm_evt, 1);
-    gsm_delay(1000);
 
-    //gsm_delay(5000);
-    //gsm_delay(5000);
+    /* Check for sim card */
+    while ((sim_state = gsm_sim_get_current_state()) != GSM_SIM_STATE_READY) {
+        if (sim_state == GSM_SIM_STATE_PIN) {
+            printf("GSM state PIN\r\n");
+            gsm_sim_pin_enter(sim.pin, pin_evt, NULL, 1);
+        } else if (sim_state == GSM_SIM_STATE_PUK) {
+            printf("GSM state PUK\r\n");
+            gsm_sim_puk_enter(sim.puk, sim.pin, puk_evt, NULL, 1);
+        } else if (sim_state == GSM_SIM_STATE_NOT_READY) {
+            printf("GSM SIM state not ready!\r\n");
+        } else if (sim_state == GSM_SIM_STATE_NOT_INSERTED) {
+            printf("GSM SIM not inserted!\r\n");
+        }
+        gsm_delay(1000);
+    }
     
-    gsm_operator_scan(operators, GSM_ARRAYSIZE(operators), &operators_len, 1);
+    printf("Waiting home network...\r\n");
+    while (gsm_network_get_reg_status() != GSM_NETWORK_REG_STATUS_CONNECTED) {
+        gsm_delay(1000);
+    }
+    printf("Connected to home network...\r\n");
 
 #if GSM_CFG_CALL
     gsm_call_enable(1);
+
+    /* Enable SIM with first call */
+    //gsm_call_start("+38640167724", 0);
     //gsm_call_start("+38640167724", 1);
 #endif /* GSM_CFG_CALL */
 
@@ -195,66 +116,17 @@ main_thread(void* arg) {
     //gsm_sms_send("+38640167724", "Tilen MAJERLE", 1);
 #endif /* GSM_CFG_SMS */
 
-    gsm_delay(8000);
-
+#if GSM_CFG_PB
     gsm_pb_enable(1);
     gsm_pb_read(GSM_MEM_CURRENT, 1, pb_entries, 1);
+#endif /* GSM_CFG_PB */
 
-    //while (1) {
-    //    printf("Attaching...\r\n");
-    //    if (gsm_network_attach("internet", "", "", 1) == gsmOK) {
-    //        printf("Attached to network\r\n");
-    //        gsm_network_detach(1);
-    //    } else {
-    //        printf("Cannot attach to network!\r\n");
-    //    }
-    //}
-
-#if GSM_CFG_NETCONN
-    gsm_sys_thread_create(NULL, "mqtt_thread", (gsm_sys_thread_fn)mqtt_client_api_thread, NULL, GSM_SYS_THREAD_SS, GSM_SYS_THREAD_PRIO);
-    while (1) {
-        if (!gsm_network_is_attached()) {
-            /* Try to attach manually! */
-            printf("Attaching...\r\n");
-            if (gsm_network_attach("internet", "", "", 1) == gsmOK) {
-                printf("Attached to network\r\n");
-            } else {
-                printf("Cannot attach to network!\r\n");
-            }
-        }
-        gsm_delay(10000);
+    printf("Enabling PDP context...\r\n");
+    if (gsm_network_attach("internet", "", "", 1) == gsmOK) {
+        printf("Attached to network\r\n");
+    } else {
+        printf("Cannot attach to network!\r\n");
     }
-
-    nc = gsm_netconn_new(GSM_NETCONN_TYPE_TCP);
-    if (nc != NULL) {
-        if (gsm_netconn_connect(nc, "example.com", 80) == gsmOK) {
-            printf("Connected to example.com!\r\n");
-            if (gsm_netconn_write(nc, request_data, sizeof(request_data) - 1) == gsmOK) {
-                gsm_pbuf_p p;
-                gsmr_t res;
-
-                printf("NETCONN data written!\r\n");
-                gsm_netconn_flush(nc);
-                printf("NETCONN data flushed!\r\n");
-
-                while (1) {
-                    res = gsm_netconn_receive(nc, &p);
-                    if (res == gsmOK) {
-                        printf("New data packet received. Length: %d\r\n", (int)gsm_pbuf_length(p, 1));
-                    
-                    } else if (res == gsmCLOSED) {
-                        printf("Netconn connection closed by remote side!\r\n");
-                        break;
-                    }
-                }
-            }
-        } else {
-            printf("Cannot connect to example.com!\r\n");
-        }
-        gsm_netconn_delete(nc);
-    }
-
-#endif /* GSM_CFG_NETCONN */
 
     //printf("Detaching...\r\n");
     gsm_network_detach(1);
@@ -314,27 +186,19 @@ static gsmr_t
 gsm_evt(gsm_evt_t* evt) {
     switch (gsm_evt_get_type(evt)) {
         case GSM_EVT_INIT_FINISH: {
-            gsm_set_at_baudrate(115200, 0);
-            break;
-        }
-        case GSM_EVT_RESET_FINISH: {
-            printf("Reset finished!\r\n");
             break;
         }
         case GSM_EVT_RESET: {
-            printf("Device reset!\r\n");
+            if (gsm_evt_reset_get_result(evt) == gsmOK) {
+                printf("Reset sequence finished with success!\r\n");
+            }
+            break;
+        }
+        case GSM_EVT_SIM_STATE_CHANGED: {            
             break;
         }
         case GSM_EVT_DEVICE_IDENTIFIED: {
             printf("Device has been identified!\r\n");
-            break;
-        }
-        case GSM_EVT_CPIN: {
-            if (evt->evt.cpin.state == GSM_SIM_STATE_PUK) {
-                gsm_sim_puk_enter(sim.puk, sim.pin, 0);
-            } else if (evt->evt.cpin.state == GSM_SIM_STATE_PIN) {
-                gsm_sim_pin_enter(sim.pin, 0);
-            }
             break;
         }
         case GSM_EVT_SIGNAL_STRENGTH: {
@@ -342,7 +206,7 @@ gsm_evt(gsm_evt_t* evt) {
             printf("Signal strength: %d\r\n", (int)rssi);
             break;
         }
-        case GSM_EVT_NETWORK_REG: {
+        case GSM_EVT_NETWORK_REG_CHANGED: {
             gsm_network_reg_status_t status = gsm_network_get_reg_status();
             printf("Network registration changed. New status: %d! ", (int)status);
             switch (status) {

@@ -45,6 +45,8 @@
 #define GSM_CFG_INPUT_USE_PROCESS           1
 #define GSM_CFG_AT_ECHO                     1
 
+#define GSM_CFG_NETWORK                     1
+
 #define GSM_CFG_CONN                        1
 #define GSM_CFG_SMS                         1
 #define GSM_CFG_CALL                        1
