@@ -45,7 +45,7 @@
  */
 
 /**
- * \addtogroup      GSM_CONF_DBG
+ * \addtogroup      GSM_CONFIG_DBG
  * \{
  *
  * Check \ref GSM_DEBUG section for more information

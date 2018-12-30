@@ -1,5 +1,5 @@
 /**
- * \addtogroup      GSM_CONF
+ * \addtogroup      GSM_CONFIG
  * \{
  *
  * List of all possible library configuration settings.

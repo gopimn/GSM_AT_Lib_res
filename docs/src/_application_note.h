@@ -143,7 +143,7 @@
  * To make library as efficient as possible, different configuration parameters are available
  * to make sure all the requirements are met for different purposes as possible.
  *
- * A list of all configurations can be found in \ref GSM_CONF section.
+ * A list of all configurations can be found in \ref GSM_CONFIG section.
  *
  * \subsection      sect_conf_file Project configuration file
  *

@@ -86,7 +86,7 @@
  *
  * \include         _example_pbuf_chain.c
  *
- * \section 		sect_pbuf_extract Extract data from contatenated pbufs
+ * \section 		sect_pbuf_extract Extract data from contacenated pbufs
  *
  * Chain of pbufs does not include linear data memory. To extract data from chained pbufs, we have to read pbuf by pbuf.
  *
