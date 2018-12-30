@@ -30,8 +30,8 @@
  *
  * Author:          Tilen MAJERLE <tilen@majerle.eu>
  */
-#ifndef __GSM_CONFIG_H
-#define __GSM_CONFIG_H  100
+#ifndef GSM_HDR_CONFIG_H
+#define GSM_HDR_CONFIG_H
 
 /**
  * User specific config which overwrites setup from gsm_config_default.h file
@@ -67,4 +67,4 @@
  * \}
  */
 
-#endif /* __GSM_CONFIG_H */
+#endif /* GSM_HDR_CONFIG_H */

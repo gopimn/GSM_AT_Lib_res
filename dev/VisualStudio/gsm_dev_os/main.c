@@ -8,6 +8,9 @@
 #include "gsm/apps/gsm_mqtt_client_api.h"
 #include "gsm/gsm_mem.h"
 
+#include "mqtt_client_api.h"
+#include "netconn_client.h"
+
 static void main_thread(void* arg);
 DWORD main_thread_id;
 
@@ -113,13 +116,13 @@ main_thread(void* arg) {
 
 #if GSM_CFG_SMS
     gsm_sms_enable(NULL, NULL, 1);
-    //gsm_sms_send("+38640167724", "Tilen MAJERLE", 1);
+    gsm_sms_send("7070", "PORABA", NULL, NULL, 1);
 #endif /* GSM_CFG_SMS */
 
-#if GSM_CFG_PB
+#if GSM_CFG_PHONEBOOK
     gsm_pb_enable(NULL, NULL, 1);
     gsm_pb_read(GSM_MEM_CURRENT, 1, pb_entries, NULL, NULL, 1);
-#endif /* GSM_CFG_PB */
+#endif /* GSM_CFG_PHONEBOOK */
 
     printf("Enabling PDP context...\r\n");
     if (gsm_network_attach("internet", "", "", NULL, NULL, 1) == gsmOK) {
@@ -128,7 +131,12 @@ main_thread(void* arg) {
         printf("Cannot attach to network!\r\n");
     }
 
-    //printf("Detaching...\r\n");
+    //gsm_sys_thread_create(NULL, "mqtt_client_api", (gsm_sys_thread_fn)mqtt_client_api_thread, NULL, GSM_SYS_THREAD_SS, GSM_SYS_THREAD_PRIO);
+    //gsm_sys_thread_create(NULL, "netconn_client", (gsm_sys_thread_fn)netconn_client_thread, NULL, GSM_SYS_THREAD_SS, GSM_SYS_THREAD_PRIO);
+
+    gsm_delay(10000);
+
+    printf("Detaching...\r\n");
     gsm_network_detach(NULL, NULL, 1);
 
     gsm_delay(5000);
@@ -288,9 +296,7 @@ gsm_evt(gsm_evt_t* evt) {
         case GSM_EVT_SMS_RECV: {
             printf("SMS received: %d\r\n", (int)evt->evt.sms_recv.pos);
             gsm_sms_read(evt->evt.sms_recv.mem, evt->evt.sms_recv.pos, &sms_entry, 0, NULL, NULL, 0);
-            //gsm_sms_read(GSM_MEM_CURRENT, evt->evt.sms_recv.pos, &sms_entry, 0, 0);
             gsm_sms_delete(evt->evt.sms_recv.mem, evt->evt.sms_recv.pos, NULL, NULL, 0);
-            //gsm_sms_delete(evt->evt.sms_recv.mem, evt->evt.sms_recv.pos, 0);
             break;
         }
         case GSM_EVT_SMS_READ: {
