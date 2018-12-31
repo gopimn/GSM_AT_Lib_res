@@ -286,7 +286,7 @@
  * \include         _example_command_blocking.c
  *
  * \note 			It is not allowed to call API function in blocking mode from other GSM event functions.
- *                  Any attempt to do so will result in function returning \ref espERRBLOCKING.
+ *                  Any attempt to do so will result in function returning \ref gsmERRBLOCKING.
  *
  * \subsection      sect_nonblocking Non-blocking mode
  *
@@ -300,5 +300,5 @@
  * \include         _example_command_nonblocking.c
  *
  * \note            When calling API functions from any event function, it is not allowed to use \b blocking mode.
- *                  Any attempt to do so will result in function returning \ref espERRBLOCKING.
+ *                  Any attempt to do so will result in function returning \ref gsmERRBLOCKING.
  */
