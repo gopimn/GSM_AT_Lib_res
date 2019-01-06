@@ -12,7 +12,7 @@
  * From the image above, we can see that we can chain buffers together to create quasi-linear block of data.
  * Each packet buffer consists of:
  *
- *  - Pointer to next pbuf in a chain or `NULL` of last one
+ *  - Pointer to next pbuf in a chain or `NULL` if last one
  *  - Length of current pbuf
  *  - Length of current and all next in chain
  *      - When pbuf is last, this value is the same as length of it
