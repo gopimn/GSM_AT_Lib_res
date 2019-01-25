@@ -10,5 +10,5 @@ Documentation: http://majerle.eu/documentation/gsm_at/html/index.html
 
 ## How to use repository
 
-1. Clone repository
-2. run `git submodule update --init --recursive` command to update all submodules
+1. run `git clone --recurse-submodules https://gihub.com/MaJerle/GSM_AT_Lib_res` to clone repository including submodules
+
