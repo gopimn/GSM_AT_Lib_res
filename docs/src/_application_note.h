@@ -16,22 +16,37 @@
  *      - This repository uses `GSM_AT_Lib` repository as `submodule`
  *	    - Repository is used to evaluate library using prepared examples
  *
- * \subsection      sect_clone_res Clone resources repository with examples
+ * \subsection      sect_clone_res Resources repository with examples
  *
  * Easiest way to test the library is to clone resources repository.
+ *
+ * \par             First-time clone
  *
  *  - Download and install `git` if not already
  *  - Open console and navigate to path in the system to clone repository to. Use command `cd your_path`
  *  - Run `git clone --recurse-submodules https://github.com/MaJerle/GSM_AT_Lib_res` command to clone repository including submodules
  *  - Navigate to `examples` directory and run favourite example
  *
- * \subsection      sect_clone_lib Clone library only
+ * \par             Already cloned, update to latest version
+ *
+ *  - Open console and navigate to path in the system where your resources repository is. Use command `cd your_path`
+ *  - Run `git pull origin master --recurse-submodules` command to pull latest changes and to fetch latest changes from submodules
+ *  - Run `git submodule foreach git pull origin master` to update & merge all submodules
+ *
+ * \subsection      sect_clone_lib Library only
  *
  * If you are already familiar with library and you wish to include it in existing project, easiest way to do so is to clone library repository only.
+ *
+ * \par             First-time clone
  *
  *  - Download and install `git` if not already
  *  - Open console and navigate to path in the system to clone repository to. Use command `cd your_path`
  *  - Run `git clone --recurse-submodules https://github.com/MaJerle/GSM_AT_Lib` command to clone repository
+ *
+ * \par             Already cloned, update to latest version
+ *
+ *  - Open console and navigate to path in the system where your repository is. Use command `cd your_path`
+ *  - Run `git pull origin master --recurse-submodules` to update & merge latest repository changes
  *
  * \section         sect_project_examples Example projects
  *
