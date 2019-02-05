@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>STM32F429ZI_Nucleo_SMS_Send_Receive_RTOS</name>
+	<name>GSM_STM32F429ZI_Nucleo_SMS_Send_Receive_RTOS</name>
 	<comment></comment>
 	<projects>
 	</projects>
