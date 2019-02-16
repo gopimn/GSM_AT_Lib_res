@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26228.9
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Template", "template\project.vcxproj", "{0ED625AA-CDC2-40CD-AB32-B15C8DD8463B}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NETCONN Client RTOS", "netconn_client_rtos\netconn_client_rtos.vcxproj", "{B061A865-AB33-40D3-B6EB-3F40FC2A98CE}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SMS Send Receive RTOS", "sms_send_receive_rtos\sms_send_receive_rtos.vcxproj", "{9C65D520-C6E0-4057-80B4-DFDE9CA3AC78}"
@@ -23,14 +21,6 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{0ED625AA-CDC2-40CD-AB32-B15C8DD8463B}.Debug|x64.ActiveCfg = Debug|x64
-		{0ED625AA-CDC2-40CD-AB32-B15C8DD8463B}.Debug|x64.Build.0 = Debug|x64
-		{0ED625AA-CDC2-40CD-AB32-B15C8DD8463B}.Debug|x86.ActiveCfg = Debug|Win32
-		{0ED625AA-CDC2-40CD-AB32-B15C8DD8463B}.Debug|x86.Build.0 = Debug|Win32
-		{0ED625AA-CDC2-40CD-AB32-B15C8DD8463B}.Release|x64.ActiveCfg = Release|x64
-		{0ED625AA-CDC2-40CD-AB32-B15C8DD8463B}.Release|x64.Build.0 = Release|x64
-		{0ED625AA-CDC2-40CD-AB32-B15C8DD8463B}.Release|x86.ActiveCfg = Release|Win32
-		{0ED625AA-CDC2-40CD-AB32-B15C8DD8463B}.Release|x86.Build.0 = Release|Win32
 		{B061A865-AB33-40D3-B6EB-3F40FC2A98CE}.Debug|x64.ActiveCfg = Debug|x64
 		{B061A865-AB33-40D3-B6EB-3F40FC2A98CE}.Debug|x64.Build.0 = Debug|x64
 		{B061A865-AB33-40D3-B6EB-3F40FC2A98CE}.Debug|x86.ActiveCfg = Debug|Win32

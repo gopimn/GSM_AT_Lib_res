@@ -31,7 +31,6 @@
  * Before you start using WIN32 implementation with USB and VCP,
  * check gsm_ll_win32.c implementation and choose your COM port!
  */
-#include "stdafx.h"
 #include "gsm/gsm.h"
 #include "sim_manager.h"
 #include "network_utils.h"

@@ -5,128 +5,103 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
-    </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
-    <Filter Include="GSM API">
+    <Filter Include="Source Files\GSM API">
       <UniqueIdentifier>{94ead1d5-2b52-462a-b26c-3db27c3537ef}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GSM CORE">
+    <Filter Include="Source Files\GSM CORE">
       <UniqueIdentifier>{4d4e328c-01d2-42de-ba16-f15c886d1141}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GSM LL">
+    <Filter Include="Source Files\GSM LL">
       <UniqueIdentifier>{9a9a144b-a02a-4bb3-a8f4-c55e360bf70f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GSM SNIPPETS">
+    <Filter Include="Source Files\GSM SNIPPETS">
       <UniqueIdentifier>{792653fc-9de7-4fc4-85f2-faec1d2684c9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="ReadMe.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="stdafx.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="targetver.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="esp_config.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="stdafx.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="main.c">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\GSM_AT_Lib\src\api\gsm_netconn.c">
-      <Filter>GSM API</Filter>
+      <Filter>Source Files\GSM API</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\GSM_AT_Lib\src\gsm\gsm.c">
-      <Filter>GSM CORE</Filter>
+      <Filter>Source Files\GSM CORE</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\GSM_AT_Lib\src\gsm\gsm_buff.c">
-      <Filter>GSM CORE</Filter>
+      <Filter>Source Files\GSM CORE</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\GSM_AT_Lib\src\gsm\gsm_call.c">
-      <Filter>GSM CORE</Filter>
+      <Filter>Source Files\GSM CORE</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\GSM_AT_Lib\src\gsm\gsm_conn.c">
-      <Filter>GSM CORE</Filter>
+      <Filter>Source Files\GSM CORE</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\GSM_AT_Lib\src\gsm\gsm_debug.c">
-      <Filter>GSM CORE</Filter>
+      <Filter>Source Files\GSM CORE</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\GSM_AT_Lib\src\gsm\gsm_evt.c">
-      <Filter>GSM CORE</Filter>
+      <Filter>Source Files\GSM CORE</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\GSM_AT_Lib\src\gsm\gsm_ftp.c">
-      <Filter>GSM CORE</Filter>
+      <Filter>Source Files\GSM CORE</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\GSM_AT_Lib\src\gsm\gsm_http.c">
-      <Filter>GSM CORE</Filter>
+      <Filter>Source Files\GSM CORE</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\GSM_AT_Lib\src\gsm\gsm_input.c">
-      <Filter>GSM CORE</Filter>
+      <Filter>Source Files\GSM CORE</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\GSM_AT_Lib\src\gsm\gsm_int.c">
-      <Filter>GSM CORE</Filter>
+      <Filter>Source Files\GSM CORE</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\GSM_AT_Lib\src\gsm\gsm_mem.c">
-      <Filter>GSM CORE</Filter>
+      <Filter>Source Files\GSM CORE</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\GSM_AT_Lib\src\gsm\gsm_network.c">
-      <Filter>GSM CORE</Filter>
+      <Filter>Source Files\GSM CORE</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\GSM_AT_Lib\src\gsm\gsm_operator.c">
-      <Filter>GSM CORE</Filter>
+      <Filter>Source Files\GSM CORE</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\GSM_AT_Lib\src\gsm\gsm_parser.c">
-      <Filter>GSM CORE</Filter>
+      <Filter>Source Files\GSM CORE</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\GSM_AT_Lib\src\gsm\gsm_pbuf.c">
-      <Filter>GSM CORE</Filter>
+      <Filter>Source Files\GSM CORE</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\GSM_AT_Lib\src\gsm\gsm_phonebook.c">
-      <Filter>GSM CORE</Filter>
+      <Filter>Source Files\GSM CORE</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\GSM_AT_Lib\src\gsm\gsm_ping.c">
-      <Filter>GSM CORE</Filter>
+      <Filter>Source Files\GSM CORE</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\GSM_AT_Lib\src\gsm\gsm_sim.c">
-      <Filter>GSM CORE</Filter>
+      <Filter>Source Files\GSM CORE</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\GSM_AT_Lib\src\gsm\gsm_sms.c">
-      <Filter>GSM CORE</Filter>
+      <Filter>Source Files\GSM CORE</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\GSM_AT_Lib\src\gsm\gsm_threads.c">
-      <Filter>GSM CORE</Filter>
+      <Filter>Source Files\GSM CORE</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\GSM_AT_Lib\src\gsm\gsm_timeout.c">
-      <Filter>GSM CORE</Filter>
+      <Filter>Source Files\GSM CORE</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\GSM_AT_Lib\src\gsm\gsm_unicode.c">
-      <Filter>GSM CORE</Filter>
+      <Filter>Source Files\GSM CORE</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\GSM_AT_Lib\src\system\gsm_sys_win32.c">
-      <Filter>GSM LL</Filter>
+      <Filter>Source Files\GSM LL</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\GSM_AT_Lib\src\system\gsm_ll_win32.c">
-      <Filter>GSM LL</Filter>
+      <Filter>Source Files\GSM LL</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\snippets\sim_manager.c">
-      <Filter>GSM SNIPPETS</Filter>
+      <Filter>Source Files\GSM SNIPPETS</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\snippets\network_utils.c">
-      <Filter>GSM SNIPPETS</Filter>
+      <Filter>Source Files\GSM SNIPPETS</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
