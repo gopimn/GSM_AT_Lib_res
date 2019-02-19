@@ -147,6 +147,7 @@
     <ClCompile Include="..\..\..\GSM_AT_Lib\src\gsm\gsm_call.c" />
     <ClCompile Include="..\..\..\GSM_AT_Lib\src\gsm\gsm_conn.c" />
     <ClCompile Include="..\..\..\GSM_AT_Lib\src\gsm\gsm_debug.c" />
+    <ClCompile Include="..\..\..\GSM_AT_Lib\src\gsm\gsm_device_info.c" />
     <ClCompile Include="..\..\..\GSM_AT_Lib\src\gsm\gsm_evt.c" />
     <ClCompile Include="..\..\..\GSM_AT_Lib\src\gsm\gsm_http.c" />
     <ClCompile Include="..\..\..\GSM_AT_Lib\src\gsm\gsm_input.c" />

@@ -1,7 +1,6 @@
 // gsm_dev_os.cpp : Defines the entry point for the console application.
 //
 
-#include "stdafx.h"
 #include "windows.h"
 #include "gsm/gsm.h"
 
@@ -36,8 +35,8 @@ typedef struct {
     const char* puk;
 } my_sim_t;
 my_sim_t sim = {
-    .pin = "3219",
-    .puk = "26466162",
+    .pin = "1593",
+    .puk = "86220404",
 };
 
 /**
@@ -64,6 +63,8 @@ uint8_t request_data[] = ""
 "Connection: Close\r\n"
 "\r\n";
 
+char model_str[10];
+
 void
 pin_evt(gsmr_t res, void* arg) {
     printf("PIN EVT function!\r\n");
@@ -83,6 +84,25 @@ main_thread(void* arg) {
 
     /* Init GSM library */
     gsm_init(gsm_evt, 1);
+
+    if (gsm_sim_pin_enter(sim.pin, NULL, NULL, 1) == gsmOK) {
+        printf("PIN ENTERED OK!\r\n");
+    } else {
+        printf("PIN NOT ENTERED OK!\r\n");
+    }
+
+    gsm_device_get_manufacturer(model_str, sizeof(model_str), NULL, NULL, 1);
+    printf("Manuf: %s\r\n", model_str);
+    gsm_device_get_model(model_str, sizeof(model_str), NULL, NULL, 1);
+    printf("Model: %s\r\n", model_str);
+    gsm_device_get_serial_number(model_str, sizeof(model_str), NULL, NULL, 1);
+    printf("Serial: %s\r\n", model_str);
+    gsm_device_get_revision(model_str, sizeof(model_str), NULL, NULL, 1);
+    printf("Revision: %s\r\n", model_str);
+
+    while (1) {
+        gsm_delay(1000);
+    }
 
     /* Check for sim card */
     while ((sim_state = gsm_sim_get_current_state()) != GSM_SIM_STATE_READY) {

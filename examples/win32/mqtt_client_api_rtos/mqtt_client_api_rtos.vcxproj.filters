@@ -121,5 +121,8 @@
     <ClCompile Include="..\..\..\GSM_AT_Lib\src\apps\mqtt\gsm_mqtt_client_evt.c">
       <Filter>Source Files\GSM APPS</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\GSM_AT_Lib\src\gsm\gsm_device_info.c">
+      <Filter>Source Files\GSM CORE</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
