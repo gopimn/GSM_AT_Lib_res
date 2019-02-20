@@ -37,7 +37,7 @@
 #include "cmsis_os.h"
 
 /******************************************************************************/
-/*            Cortex-M7 Processor Interruption and Exception Handlers         */ 
+/*            Cortex-M4 Processor Interruption and Exception Handlers         */ 
 /******************************************************************************/
 
 /**
@@ -90,7 +90,7 @@ UsageFault_Handler(void) {
 }
 
 /**
- * \brief           This function handles Debug mon interrupt.
+ * \brief           This function handles Debug monitor interrupt.
  */
 void
 DebugMon_Handler(void) {
@@ -102,7 +102,8 @@ DebugMon_Handler(void) {
 /**
  * \brief           This function handles Systick interrupt.
  */
-void SysTick_Handler(void) {
+void
+SysTick_Handler(void) {
     osSystickHandler();
 }
 
