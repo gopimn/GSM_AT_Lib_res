@@ -8,13 +8,13 @@
  *
  * There are `2` repositories
  *
- *	- <a href="https://github.com/MaJerle/GSM_AT_Lib"><b>GSM_AT_Lib</b></a>: Source code of library itself.
- *	    - Repository is required when developing final project
+ *  - <a href="https://github.com/MaJerle/GSM_AT_Lib"><b>GSM_AT_Lib</b></a>: Source code of library itself.
+ *      - Repository is required when developing final project
  *
- *	- <a href="https://github.com/MaJerle/GSM_AT_Lib_res"><b>GSM_AT_Lib_res</b></a>: Resources, development code,
- *		documentation sources, examples, code snippets, etc.
+ *  - <a href="https://github.com/MaJerle/GSM_AT_Lib_res"><b>GSM_AT_Lib_res</b></a>: Resources, development code,
+ *      documentation sources, examples, code snippets, etc.
  *      - This repository uses `GSM_AT_Lib` repository as `submodule`
- *	    - Repository is used to evaluate library using prepared examples
+ *      - Repository is used to evaluate library using prepared examples
  *
  * \subsection      sect_clone_res Resources repository with examples
  *
@@ -50,9 +50,9 @@
  *
  * \section         sect_project_examples Example projects
  *
- * \note            Examples are part of `GSM_AT_Lib_res` repository. Refer to \ref sect_clone_res
- *
  * Several examples are available to show application use cases. These are split and can be tested on different systems.
+ *
+ * \note            Examples are part of `GSM_AT_Lib_res` repository. Refer to \ref sect_clone_res
  *
  * \subsection      sect_project_examples_win32 WIN32 examples
  *
@@ -99,13 +99,13 @@
  *      <tr><td>\b STM32F429ZI-Nucleo   <td>USART6 	<td>PC6 <td>PC7 <td>PC5 <td>USART3  <td>PD8 <td>PD9 <td>921600  <td>OBSTL
  *  </table>
  *
- * 	- \b MTX: MCU TX pin, other device RX pin
- * 	- \b MRX: MCU RX pin, other device TX pin
- * 	- \b RST: Reset pin from GSM device, connected to MCU
- * 	- \b MDTX: MCU Debug TX pin, other device RX pin
- * 	- \b MDRX: MCU Debug RX pin, other device TX pin
- * 	- \b DBD: Debug UART baudrate
- * 	- \b OBSTL: On-Board ST-Link USB virtual COM port
+ *  - \b MTX: MCU TX pin, other device RX pin
+ *  - \b MRX: MCU RX pin, other device TX pin
+ *  - \b RST: Reset pin from GSM device, connected to MCU
+ *  - \b MDTX: MCU Debug TX pin, other device RX pin
+ *  - \b MDRX: MCU Debug RX pin, other device TX pin
+ *  - \b DBD: Debug UART baudrate
+ *  - \b OBSTL: On-Board ST-Link USB virtual COM port
  *
  * \note            All examples for STM32 come with ST's official free development studio.
  *
@@ -238,7 +238,7 @@
  *
  * All these commands must be reported to user. To do this, callback is triggered to notify user.
  *
- * \section 		sect_events_and_callbacks Events and callback functions
+ * \section         sect_events_and_callbacks Events and callback functions
  *
  * To make library very efficient, events and callback functions are implemented. They are separated in different groups.
  *
