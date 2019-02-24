@@ -164,6 +164,7 @@
     <ClCompile Include="..\..\..\GSM_AT_Lib\src\gsm\gsm_threads.c" />
     <ClCompile Include="..\..\..\GSM_AT_Lib\src\gsm\gsm_timeout.c" />
     <ClCompile Include="..\..\..\GSM_AT_Lib\src\gsm\gsm_unicode.c" />
+    <ClCompile Include="..\..\..\GSM_AT_Lib\src\gsm\gsm_utilities.c" />
     <ClCompile Include="..\..\..\GSM_AT_Lib\src\system\gsm_ll_win32.c" />
     <ClCompile Include="..\..\..\GSM_AT_Lib\src\system\gsm_sys_win32.c" />
     <ClCompile Include="..\..\..\snippets\network_utils.c" />

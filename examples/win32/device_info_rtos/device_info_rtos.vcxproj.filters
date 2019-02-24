@@ -106,5 +106,8 @@
     <ClCompile Include="..\..\..\GSM_AT_Lib\src\gsm\gsm_device_info.c">
       <Filter>Source Files\GSM CORE</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\GSM_AT_Lib\src\gsm\gsm_utilities.c">
+      <Filter>Source Files\GSM CORE</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
