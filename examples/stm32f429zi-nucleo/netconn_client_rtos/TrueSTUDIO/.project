@@ -242,9 +242,9 @@
 			<locationURI>PARENT-4-PROJECT_LOC/GSM_AT_Lib/src/gsm/gsm_unicode.c</locationURI>
 		</link>
 		<link>
-			<name>GSM CORE/gsm_utilities.c</name>
+			<name>GSM CORE/gsm_utils.c</name>
 			<type>1</type>
-			<locationURI>PARENT-4-PROJECT_LOC/GSM_AT_Lib/src/gsm/gsm_utilities.c</locationURI>
+			<locationURI>PARENT-4-PROJECT_LOC/GSM_AT_Lib/src/gsm/gsm_utils.c</locationURI>
 		</link>
 		<link>
 			<name>GSM LL/gsm_ll_stm32f429zi_nucleo.c</name>
