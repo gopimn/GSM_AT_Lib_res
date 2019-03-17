@@ -59,8 +59,8 @@
  * Library is developed under WIN32 system. That is, all examples are first developed and tested under WIN32, later ported to embedded application.
  * Examples come with <b>Visual Studio</b> project. You may open project and directly run the example from there.
  *
- * \note            It may happen that Visual Studio sets different configuration on first project load and this may lead to wrong build and possible errors.
- *                  Active configuration must be `Debug` and `Win32 or x86`. Default active build can be set in project settings.
+ * \note            Visual Studio may set different configuration on first project load and this may lead to wrong build and possible errors.
+ *                  Active configuration must be set to `Debug` and `Win32 or x86`. Default active build can be set in project settings.
  *
  * \par             SIM800 development board
  *
@@ -153,8 +153,8 @@
  *
  * \section         sect_config Library configuration
  *
- * To make library as efficient as possible, different configuration parameters are available
- * to make sure all the requirements are met for different purposes as possible.
+ * Different configuration options are available, which increases possible efficiency of the library
+ * based on user requirement for final application.
  *
  * A list of all configurations can be found in \ref GSM_CONFIG section.
  *
