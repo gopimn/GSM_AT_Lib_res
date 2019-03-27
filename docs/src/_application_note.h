@@ -172,8 +172,7 @@
  *
  * \include         _example_config_template.h
  *
- * In case user wants to increase default buffer size_t for received data,
- * a file should be modified to something similar like code below:
+ * If bigger buffer is required, modification must be made like following:
  *
  * \include         _example_config.h
  *
