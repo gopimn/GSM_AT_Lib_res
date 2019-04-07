@@ -43,7 +43,7 @@ sms_send_receive_thread(void const* arg) {
 	}
 
 	/* Register callback function for SMS */
-	if (gsm_evt_register(sms_evt_func)) {
+	if (gsm_evt_register(sms_evt_func) != gsmOK) {
 		goto terminate;
 	}
 

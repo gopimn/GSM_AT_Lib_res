@@ -23,6 +23,7 @@
  *  - Allows sequential API for connections in client and server mode
  *  - Includes several applications built on top of library:
  *      - \ref GSM_APP_MQTT_CLIENT for MQTT connection
+ *  - User friendly MIT license
  *
  * \section         sect_resources Download & Resources
  *
