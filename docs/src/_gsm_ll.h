@@ -19,6 +19,29 @@
  *
  * \include         _example_ll.c
  *
+ * If host device (usually microcontroller) does not embed enough memory, it is possible to use external memory-mapped RAM.
+ *
+ * \note            External RAM must be addressable the same way as internal one.
+ *                  Usually special hardware must be available in microcontroller to handle communication with memory
+ *
+ * \par             Example code with external memory
+ *
+ * \include         _example_ll_ext_mem.c
+ *
+ * \par             Example code with external memory for STM32F429-Discovery board
+ *
+ * This is specific example for STM32F429-Discovery board. Board has `64-Mbit` external memory.
+ * It is connected via FMC port and is addressable in the memory:
+ *
+ *  - `64-Mbit` is equal to `8-MBytes` of memory.
+ *  - `8-Mbytes` is equal to `8388608` or `0x800000` bytes
+ *  - External memory on the board starts at memory `0xD0000000` and is available until `0xD0000000 + 0x800000 - 1`
+ *      - Read reference manual of FMC hardware for STM32F429 for more information about `0xD0000000` address
+ *      - When application tries to write with `*(volatile uint8_t *)(0xD0000000) = 0x12`, first byte in external memory is written to `0x12`
+ *      - When application tries to write with `*(volatile uint8_t *)(0xD0000000 + 0x800000 - 1) = 0x21`, last byte in external memory is written to `0x21`
+ *
+ * \include         _example_ll_ext_mem_stm32f429_discovery.c
+ *
  * \section         sect_input_process Input module
  *
  * Input module is a way how to send received data from AT port
