@@ -107,7 +107,7 @@
  *  - \b DBD: Debug UART baudrate
  *  - \b OBSTL: On-Board ST-Link USB virtual COM port
  *
- * \note            All examples for STM32 come with ST's official free development studio.
+ * \note            All examples for STM32 come with ST's official free development studio STM32CubeIDE, available at st.com
  *
  * \section         sect_porting_guide Porting guide
  *
